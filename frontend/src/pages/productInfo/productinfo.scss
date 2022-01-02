@@ -1,0 +1,311 @@
+$maincolor: #2879fe;
+$ligthtext: lightgray;
+$ligth2text: rgb(167, 164, 164);
+$white: white;
+$black: black;
+
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap");
+
+@mixin flex($jus, $ali, $gap: 0) {
+  display: flex;
+
+  @if $jus == sb {
+    justify-content: space-between;
+  }
+  @if $jus == c {
+    justify-content: center;
+  }
+  @if $jus == se {
+    justify-content: space-evenly;
+  }
+  @if $jus == sa {
+    justify-content: space-around;
+  }
+
+  @if $jus == s {
+    justify-content: flex-start;
+  }
+  //   .......................
+  @if $ali == s {
+    align-items: flex-start;
+  }
+  @if $ali == c {
+    align-items: center;
+  }
+  @if $ali == b {
+    align-items: baseline;
+  }
+  gap: $gap;
+  flex-wrap: wrap;
+}
+@mixin width($x, $gap, $percent: false) {
+  @if $percent {
+    @if $gap==0 {
+      width: calc((#{$percent}));
+      max-width: calc((#{$percent}));
+    } @else {
+      width: calc((#{$percent}) - #{$gap} + (#{$gap} / #{$x}));
+      max-width: calc((#{$percent}) - #{$gap} + (#{$gap} / #{$x}));
+    }
+  } @else {
+    @if $gap==0 {
+      width: calc((100% / #{$x}));
+      max-width: calc((100% / #{$x}));
+    } @else {
+      width: calc((100% / #{$x}) - #{$gap} + (#{$gap} / #{$x}));
+      max-width: calc((100% / #{$x}) - #{$gap} + (#{$gap} / #{$x}));
+    }
+  }
+}
+@mixin media($x) {
+  @media screen and (max-width:#{$x}px ) {
+    @content;
+  }
+}
+@mixin btn {
+  border: none;
+  outline: none;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+:root {
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Hind", sans-serif;
+}
+
+.product_home {
+  width: 90%;
+  margin: 50px auto;
+  opacity: 0;
+  animation: fadeanimation 0.8s forwards;
+
+  > .wraper {
+    @include flex(s, s, 50px);
+    > .item {
+      @include width(2, 50px, 40%);
+    }
+    > .item.gallery {
+      @include media(1000) {
+        @include width(2, 0, 70%);
+        margin: 0 auto;
+      }
+      @include media(426) {
+        @include width(2, 0, 95%);
+        margin: 0 auto;
+      }
+      > .product_gallery {
+        > .swiper-container {
+        }
+        > .second.swiper-container {
+          > .swiper-wrapper {
+          }
+        }
+      }
+    }
+    > .item.content {
+      @include width(2, 50px, 60%);
+      @include media(1000) {
+        @include width(2, 0, 100%);
+      }
+      > .avalible {
+        @include flex(s, c, 5px);
+        > h6 {
+          font-size: 14px;
+          color: $black;
+          font-weight: 100;
+        }
+        > p {
+          font-size: 14px;
+          color: $ligthtext;
+          font-weight: 100;
+        }
+      }
+      > .title {
+        font-size: 30px;
+        font-weight: 100;
+        color: $black;
+        margin: 10px 0;
+      }
+      > .price {
+        font-size: 25px;
+        color: $maincolor;
+        font-weight: 400;
+        margin-top: 0;
+      }
+      > .addtocart {
+        > .quntity {
+          width: 150px;
+          background-color: rgb(175, 172, 172);
+          position: relative;
+          border-radius: 10px;
+          height: 40px;
+          margin: 20px 0;
+          > .pluse {
+            position: absolute;
+            top: 0;
+            right: 7px;
+            height: 100%;
+            width: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > svg {
+              font-size: 20px;
+              cursor: pointer;
+            }
+          }
+          > .nigative {
+            position: absolute;
+            top: 0;
+            left: 7px;
+            height: 100%;
+            width: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            > svg {
+              font-size: 20px;
+              cursor: pointer;
+            }
+          }
+          > .numb {
+            position: absolute;
+            width: 40%;
+            top: 0;
+            left: 30%;
+            height: 100%;
+            background-color: lightgray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+        }
+        > button {
+          @include width(2, 0, 65%);
+          @include flex(c, c, 10px);
+          @include btn();
+          padding: 15px;
+          font-size: 17px;
+          margin: 40px auto;
+          color: $white;
+          background-color: $maincolor;
+          transition: all 0.3s;
+          > svg {
+            margin-bottom: 3px;
+            font-size: 18px;
+          }
+          &:hover {
+            background-color: darken($maincolor, 10%);
+          }
+        }
+      }
+      > .description {
+        cursor: pointer;
+        border-top: 1px solid lightgray;
+        padding: 30px 0;
+        > h5 {
+          font-size: 16px;
+          color: black;
+          font-weight: 400;
+          margin-bottom: 30px;
+        }
+        > .wrap {
+          height: 0;
+          overflow: hidden;
+          transition: all 0.3s;
+          > .content {
+            > p {
+              font-size: 14px;
+              color: $ligth2text;
+              font-weight: 100;
+            }
+          }
+        }
+      }
+      > .addtion_info {
+        cursor: pointer;
+        border-top: 1px solid lightgray;
+        border-bottom: 1px solid lightgray;
+        padding: 30px 0;
+        > h5 {
+          font-size: 16px;
+          color: black;
+          font-weight: 400;
+          margin-bottom: 30px;
+        }
+        > .wrap {
+          transition: all 0.3s;
+          height: 0;
+          overflow: hidden;
+          > .content {
+            > .item {
+              @include flex(s, c, 40px);
+              > h6 {
+                @include width(2, 40px, 15%);
+                font-size: 14px;
+                color: black;
+                font-weight: 100;
+              }
+              > p {
+                @include width(2, 40px, 85%);
+
+                font-size: 14px;
+                color: $ligth2text;
+                font-weight: 100;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.swiper-wrapper {
+  //   height: 400px;
+  width: 100%;
+  > .swiper-slide {
+    > img {
+      width: 100%;
+      //   height: 400px;
+      object-fit: cover;
+    }
+  }
+}
+.second.swiper-container {
+  > .swiper-wrapper {
+    height: 120px;
+    @include media(400) {
+      height: 110px;
+    }
+    @include media(350) {
+      height: 90px;
+    }
+    > .swiper-slide {
+      > img {
+        width: 100%;
+        height: 120px;
+        @include media(400) {
+          height: 110px;
+        }
+        @include media(350) {
+          height: 90px;
+        }
+        object-fit: cover;
+      }
+    }
+  }
+}
+@keyframes fadeanimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

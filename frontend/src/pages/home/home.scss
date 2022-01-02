@@ -1,0 +1,431 @@
+$maincolor: #2879fe;
+$ligthtext: lightgray;
+$white: white;
+$black: black;
+
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap");
+
+@mixin flex($jus, $ali, $gap: 0) {
+  display: flex;
+
+  @if $jus == sb {
+    justify-content: space-between;
+  }
+  @if $jus == c {
+    justify-content: center;
+  }
+  @if $jus == se {
+    justify-content: space-evenly;
+  }
+  @if $jus == sa {
+    justify-content: space-around;
+  }
+
+  @if $jus == s {
+    justify-content: flex-start;
+  }
+  //   .......................
+  @if $ali == s {
+    align-items: flex-start;
+  }
+  @if $ali == c {
+    align-items: center;
+  }
+  @if $ali == b {
+    align-items: baseline;
+  }
+  gap: $gap;
+  flex-wrap: wrap;
+}
+@mixin width($x, $gap, $percent: false) {
+  @if $percent {
+    @if $gap==0 {
+      width: calc((#{$percent}));
+      max-width: calc((#{$percent}));
+    } @else {
+      width: calc((#{$percent}) - #{$gap} + (#{$gap} / #{$x}));
+      max-width: calc((#{$percent}) - #{$gap} + (#{$gap} / #{$x}));
+    }
+  } @else {
+    @if $gap==0 {
+      width: calc((100% / #{$x}));
+      max-width: calc((100% / #{$x}));
+    } @else {
+      width: calc((100% / #{$x}) - #{$gap} + (#{$gap} / #{$x}));
+      max-width: calc((100% / #{$x}) - #{$gap} + (#{$gap} / #{$x}));
+    }
+  }
+}
+@mixin media($x) {
+  @media screen and (max-width:#{$x}px ) {
+    @content;
+  }
+}
+@mixin btn {
+  border: none;
+  outline: none;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+:root {
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Hind", sans-serif;
+}
+
+.home_silder__ {
+  min-height: 10vh;
+  overflow: hidden;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeanimation 0.8s forwards;
+  .swiper-container {
+    height: 100%;
+  }
+
+  .img {
+    min-height: 10vh;
+    position: relative;
+    > a {
+      img {
+        width: 100%;
+        min-height: 10vh;
+        display: block;
+        object-fit: contain;
+      }
+    }
+    > p {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+
+      color: #2879fe;
+      font-size: 22px;
+      font-weight: bolder;
+      transition: all 0.3s;
+      user-select: none;
+
+      &:hover {
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+      @include media(800) {
+        display: none;
+      }
+    }
+  }
+}
+
+// ............................................................
+.sec_home_two {
+  width: 90%;
+  margin: 0px auto;
+  opacity: 0;
+  animation: fadeanimation 0.8s forwards;
+  > .wraper {
+    @include flex(s, s, 30px);
+
+    > .left_ {
+      width: calc((100% / 2) - 30px + (30px / 2));
+      max-width: calc((100% / 2) - 30px + (30px / 2));
+
+      cursor: pointer;
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 20px;
+      @include media(600) {
+        width: calc((100% / 1));
+        max-width: calc((100% / 1));
+      }
+
+      > .item {
+        margin-bottom: 10px;
+        width: calc((100% / 2) - 20px + (20px / 2));
+        max-width: calc((100% / 2) - 20px + (20px / 2));
+        > a {
+          text-decoration: none;
+          > .img {
+            overflow: hidden;
+            margin-bottom: 10px;
+            position: relative;
+
+            img {
+              max-width: 100%;
+              display: block;
+              object-fit: cover;
+              transition: all 0.2s;
+            }
+            > button {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              border: none;
+              outline: none;
+              padding: 8px 20px;
+              background-color: $white;
+              color: $black;
+              border-radius: 5px;
+              cursor: pointer;
+              transition: all 0.3s;
+            }
+            &:hover img {
+              transform: scale(1.1);
+            }
+            &:hover button {
+              color: $white;
+              background-color: $maincolor;
+            }
+          }
+        }
+      }
+    }
+    > .rigth_ {
+      width: calc((100% / 2) - 30px + (30px / 2));
+      max-width: calc((100% / 2) - 30px + (30px / 2));
+      @include media(600) {
+        width: calc((100% / 1));
+        max-width: calc((100% / 1));
+      }
+      > .item {
+        text-decoration: none;
+        > .img {
+          overflow: hidden;
+          margin-bottom: 10px;
+          position: relative;
+          > a {
+            img {
+              max-width: 100%;
+              display: block;
+              object-fit: cover;
+              transition: all 0.2s;
+            }
+          }
+          > button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border: none;
+            outline: none;
+            padding: 8px 20px;
+            background-color: $white;
+            color: $black;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+          }
+          &:hover img {
+            transform: scale(1.1);
+          }
+          &:hover button {
+            color: $white;
+            background-color: $maincolor;
+          }
+        }
+      }
+      > .item.one {
+        display: flex;
+        justify-content: flex-start;
+        align-items: flex-start;
+        gap: 20px;
+        flex-wrap: wrap;
+
+        text-decoration: none;
+        > .img {
+          width: calc((100% / 2) - 20px + (20px / 2));
+          max-width: calc((100% / 2) - 20px + (20px / 2));
+        }
+      }
+    }
+  }
+}
+//................................
+
+.best_seller {
+  opacity: 0;
+  animation: fadeanimation 0.8s forwards;
+  > .wraper {
+    width: 90%;
+    margin: auto;
+    > .title {
+      text-align: center;
+      margin-bottom: 40px;
+      > h5 {
+        font-size: clamp(20px, 2vw, 25px);
+        letter-spacing: 1.5px;
+        color: $black;
+      }
+      > p {
+        font-size: clamp(15px, 1vw, 22px);
+        letter-spacing: 1.5px;
+        color: $black;
+      }
+    }
+    > .product_ {
+      @include flex(s, s, 20px);
+
+      > .item {
+        @include width(4, 20px);
+        margin-bottom: 30px;
+        @include media(1048) {
+          @include width(3, 20px);
+        }
+        @include media(773) {
+          @include width(2, 20px);
+        }
+        @include media(360) {
+          @include width(1, 20px);
+        }
+        > a {
+          text-decoration: none;
+          > .card_ {
+            // width: 300px;
+            overflow: hidden;
+            &:hover .img_ img {
+              transform: scale(1.1);
+            }
+            > .img_ {
+              overflow: hidden;
+              position: relative;
+              img {
+                width: 100%;
+                height: 100%;
+                display: block;
+                object-fit: cover;
+                object-position: center;
+                transition: all 0.3s;
+              }
+              > .overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                visibility: hidden;
+                opacity: 0;
+                transition: all 0.3s;
+                > .content {
+                  position: absolute;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  right: 10px;
+                  > .item {
+                    position: relative;
+                    margin-bottom: 10px;
+                    width: 30px;
+                    height: 30px;
+                    background-color: $white;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+                    transition: all 0.2s;
+
+                    > svg {
+                      font-size: 14px;
+                      transition: all 0.2s;
+                    }
+                    > p {
+                      position: absolute;
+                      top: 50%;
+                      transform: translateY(-50%) translateX(-10px);
+                      left: -120px;
+                      // width: 300%;
+                      overflow: hidden;
+                      max-width: 75ch;
+                      text-overflow: ellipsis;
+                      white-space: nowrap;
+                      font-size: 12px;
+                      background-color: white;
+                      padding: 2px 5px;
+                      border-radius: 3px;
+                      pointer-events: none;
+                      visibility: hidden;
+                      // transform: translateX(-10px);
+                      opacity: 0;
+                      transition: all 0.2s;
+                    }
+                    &:hover p {
+                      visibility: visible;
+                      opacity: 1;
+                      transform: translateY(-50%) translateX(0px);
+                    }
+                    &:hover svg {
+                      color: $white;
+                    }
+                    &:hover {
+                      background-color: $maincolor;
+                    }
+                  }
+                }
+              }
+            }
+            > .card_info {
+              text-align: center;
+              background-color: $white;
+              overflow: hidden;
+              transform: translateY(50px);
+              transition: all 0.3s;
+              > .brand {
+                font-size: 12px;
+                color: $ligthtext;
+                font-weight: 200;
+                margin: 10px 0;
+              }
+              > .starts {
+                margin-bottom: 15px;
+                > svg {
+                  margin-right: 3px;
+                  color: #ffb503;
+                  font-size: 13px;
+                }
+              }
+              > .des {
+                font-size: 15px;
+                color: $black;
+                font-weight: 200;
+              }
+              > .price {
+                font-weight: 600;
+              }
+              > button {
+                border: none;
+                outline: none;
+                padding: 8px 15px;
+                background-color: $maincolor;
+                color: $white;
+                margin: 5px 0 5px 0;
+                border-radius: 3px;
+                cursor: pointer;
+              }
+            }
+            &:hover .card_info {
+              transform: translateY(-20px);
+            }
+            &:hover .img_ .overlay {
+              visibility: visible;
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeanimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

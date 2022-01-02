@@ -1,0 +1,261 @@
+$maincolor: #2879fe;
+$ligthtext: lightgray;
+$white: white;
+$black: black;
+
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap");
+
+@mixin flex($jus, $ali, $gap: 0) {
+  display: flex;
+
+  @if $jus == sb {
+    justify-content: space-between;
+  }
+  @if $jus == c {
+    justify-content: center;
+  }
+  @if $jus == se {
+    justify-content: space-evenly;
+  }
+  @if $jus == sa {
+    justify-content: space-around;
+  }
+
+  @if $jus == s {
+    justify-content: flex-start;
+  }
+  //   .......................
+  @if $ali == s {
+    align-items: flex-start;
+  }
+  @if $ali == c {
+    align-items: center;
+  }
+  @if $ali == b {
+    align-items: baseline;
+  }
+  gap: $gap;
+  flex-wrap: wrap;
+}
+@mixin width($x, $gap, $percent: false) {
+  @if $percent {
+    @if $gap==0 {
+      width: calc((#{$percent}));
+      max-width: calc((#{$percent}));
+    } @else {
+      width: calc((#{$percent}) - #{$gap} + (#{$gap} / #{$x}));
+      max-width: calc((#{$percent}) - #{$gap} + (#{$gap} / #{$x}));
+    }
+  } @else {
+    @if $gap==0 {
+      width: calc((100% / #{$x}));
+      max-width: calc((100% / #{$x}));
+    } @else {
+      width: calc((100% / #{$x}) - #{$gap} + (#{$gap} / #{$x}));
+      max-width: calc((100% / #{$x}) - #{$gap} + (#{$gap} / #{$x}));
+    }
+  }
+}
+@mixin media($x) {
+  @media screen and (max-width:#{$x}px ) {
+    @content;
+  }
+}
+@mixin btn {
+  border: none;
+  outline: none;
+  padding: 7px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+:root {
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Hind", sans-serif;
+}
+
+.cart_ {
+  width: 90%;
+  margin: 50px auto;
+  opacity: 0;
+  animation: fadeanimation 0.8s forwards;
+
+  > h5 {
+    color: black;
+    font-size: 29px;
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  > .cart_content {
+    overflow-x: auto;
+    > .item {
+      width: 100%;
+      border-top: 1px solid rgb(228, 226, 226);
+      padding: 25px 0;
+      @include flex(s, c, 20px);
+      @include media(756) {
+        width: 170%;
+      }
+      @include media(410) {
+        width: 240%;
+      }
+      > .img {
+        @include width(6, 20px, 10%);
+        > img {
+          width: 100%;
+          display: block;
+          object-fit: cover;
+        }
+      }
+      > .des {
+        @include width(6, 20px, 40%);
+        font-size: 14px;
+        color: black;
+      }
+      > .price {
+        @include width(6, 20px, 13%);
+        color: black;
+      }
+      > .quntity {
+        @include width(6, 20px, 13%);
+        position: relative;
+        border-radius: 10px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > .pluse {
+          position: absolute;
+          top: 0;
+          right: 7px;
+          height: 100%;
+          width: 15%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          > svg {
+            font-size: 20px;
+            cursor: pointer;
+          }
+        }
+        > .nigative {
+          position: absolute;
+          top: 0;
+          left: 7px;
+          height: 100%;
+          width: 15%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          > svg {
+            font-size: 20px;
+            cursor: pointer;
+          }
+        }
+        > .numb {
+          font-size: 18px;
+        }
+        > p {
+          color: rgb(182, 181, 181);
+          margin-right: 5px;
+        }
+      }
+      > .totalorice {
+        @include width(6, 20px, 13%);
+        color: black;
+      }
+      > .deleticon {
+        @include width(6, 20px, 10%);
+        > svg {
+          color: black;
+          cursor: pointer;
+          font-size: 22px;
+        }
+      }
+      &:last-of-type {
+        border-top: 1px solid rgb(228, 226, 226);
+        border-bottom: 1px solid rgb(228, 226, 226);
+      }
+    }
+    > .btn_ {
+      @include flex(sb, c, 0);
+      margin-top: 30px;
+      @include media(500) {
+        flex-direction: column;
+        @include flex(sb, s, 0);
+      }
+      > button {
+        @include flex(se, c, 0);
+        @include btn();
+        color: $maincolor;
+        transition: all 0.3s;
+        background-color: transparent;
+        > svg {
+          margin-right: 8px;
+          margin-bottom: 3px;
+          font-size: 20px;
+        }
+        &:hover {
+          color: $black;
+        }
+      }
+    }
+    > .checkout {
+      margin: 50px 0;
+      border: 1px solid lightgray;
+      width: 40%;
+      padding: 30px;
+      @include media(900) {
+        width: 90%;
+      }
+      > .item {
+        @include flex(sb, c, 0);
+        margin-bottom: 20px;
+        > p {
+          color: $black;
+          font-size: clamp(13px, 2.5vw, 18px);
+          font-weight: 500;
+        }
+        h6 {
+          color: $black;
+          font-size: clamp(13px, 2.5vw, 19px);
+          font-weight: 500;
+        }
+      }
+      > .item.grand {
+        h6 {
+          color: $maincolor;
+          font-size: clamp(13px, 2.5vw, 23px);
+          font-weight: 500;
+          margin-right: 15px;
+        }
+      }
+      button {
+        @include btn();
+        width: 100%;
+        display: block;
+        padding: 13px 0;
+        font-size: clamp(14px, 2.5vw, 17px);
+        background-color: $maincolor;
+        color: $white;
+        transition: all 0.3s;
+        &:hover {
+          background-color: darken($maincolor, 15%);
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeanimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

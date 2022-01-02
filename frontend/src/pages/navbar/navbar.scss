@@ -1,0 +1,263 @@
+$maincolor: #2879fe;
+$white: white;
+$black: black;
+
+@import url("https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200&display=swap");
+
+@mixin flex($jus, $ali, $gap: 0) {
+  display: flex;
+
+  @if $jus == sb {
+    justify-content: space-between;
+  }
+  @if $jus == c {
+    justify-content: center;
+  }
+  @if $jus == se {
+    justify-content: space-evenly;
+  }
+  @if $jus == sa {
+    justify-content: space-around;
+  }
+
+  @if $jus == s {
+    justify-content: flex-start;
+  }
+  //   .......................
+  @if $ali == s {
+    align-items: flex-start;
+  }
+  @if $ali == c {
+    align-items: center;
+  }
+  @if $ali == b {
+    align-items: baseline;
+  }
+  gap: $gap;
+  flex-wrap: wrap;
+}
+@mixin width($x, $gap, $percent) {
+  @if $percent {
+    @if $gap==0 {
+      width: calc((#{$percent}));
+      max-width: calc((#{$percent}));
+    } @else {
+      width: calc((#{$percent}) - $gap + ($gap / #{$x}));
+      max-width: calc((#{$percent}) - $gap + ($gap / #{$x}));
+    }
+  } @else {
+    @if $gap==0 {
+      width: calc((100% / #{$x}));
+      max-width: calc((100% / #{$x}));
+    } @else {
+      width: calc((100% / #{$x}) - $gap + ($gap / #{$x}));
+      max-width: calc((100% / #{$x}) - $gap + ($gap / #{$x}));
+    }
+  }
+}
+:root {
+}
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Hind", sans-serif;
+}
+
+.navbar {
+  background-color: white;
+  box-shadow: 1px 1px 23px -13px #80808082;
+  position: relative;
+  > .navwrap {
+    @include flex(sb, b, 0);
+    width: 90%;
+    margin: auto;
+    padding: 15px 0;
+    > .link_logo {
+      @include flex(s, c, 0);
+      @include width(2, 0, 70%);
+      > .logo {
+        @include width(2, 0, 35%);
+        > h5 {
+          color: $maincolor;
+          font-weight: bolder;
+          font-size: clamp(15px, 3vw, 27px);
+        }
+      }
+      > .link {
+        @include width(2, 0, 65%);
+        > ul {
+          list-style-type: none;
+          @include flex(s, c, 0);
+          > li {
+            margin-right: 15px;
+            padding: 8px;
+            &:hover a {
+              color: $maincolor;
+            }
+            a {
+              text-decoration: none;
+              color: $black;
+              font-size: 17px;
+              transition: all 0.2s linear;
+            }
+            a.active {
+              color: $maincolor;
+            }
+          }
+        }
+      }
+    }
+    > .icons {
+      @include width(2, 0, 30%);
+      display: flex;
+      justify-content: flex-end;
+      > .item {
+        > svg {
+          font-size: 21px;
+          margin-right: 13px;
+          color: #484747;
+          cursor: pointer;
+          transition: all 0.2s;
+          &:hover {
+            color: $maincolor;
+          }
+        }
+      }
+      > .item.cart {
+        position: relative;
+        > span {
+          position: absolute;
+          top: -12px;
+          right: 2px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 5;
+          font-size: smaller;
+          background-color: #2879fe;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.sidenav {
+  background-color: white;
+  box-shadow: 1px 1px 23px -13px #80808082;
+  position: relative;
+  // overflow: hidden;
+  z-index: 100;
+  > .navwrap {
+    @include flex(sb, b, 0);
+    width: 98%;
+    margin: auto;
+    padding: 15px 0;
+    > .link_logo {
+      text-align: center;
+      @include width(2, 0, 40%);
+      > .logo {
+        > h5 {
+          color: $maincolor;
+          font-weight: bolder;
+          font-size: clamp(15px, 4vw, 27px);
+        }
+      }
+    }
+    > .icons {
+      @include width(2, 0, 30%);
+      display: flex;
+      justify-content: flex-end;
+      > .item {
+        > svg {
+          font-size: clamp(15px, 1.5vw, 23px);
+          margin-right: 13px;
+          color: #484747;
+          cursor: pointer;
+          transition: all 0.2s;
+          &:hover {
+            color: $maincolor;
+          }
+        }
+      }
+      > .item.cart {
+        position: relative;
+        > span {
+          position: absolute;
+          top: -12px;
+          right: 2px;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          z-index: 5;
+          font-size: smaller;
+          background-color: #2879fe;
+          color: white;
+        }
+      }
+    }
+    > .menu {
+      @include width(2, 0, 10%);
+      text-align: center;
+      > svg {
+        cursor: pointer;
+      }
+    }
+  }
+  > .link {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    background-color: $white;
+    box-shadow: 1px 1px 23px -13px #80808082;
+    padding: 30px 10px;
+    transform: translateX(-100%);
+    transition: all 0.4s;
+    z-index: 200;
+    > .close {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      color: $maincolor;
+      cursor: pointer;
+      font-size: 23px;
+    }
+    > h5 {
+      color: $maincolor;
+      font-weight: bolder;
+      font-size: clamp(18px, 3vw, 33px);
+    }
+    > ul {
+      list-style-type: none;
+      margin-top: 20px;
+
+      > li {
+        padding: 8px;
+        &:hover a {
+          color: $maincolor;
+        }
+        a {
+          text-decoration: none;
+          color: $black;
+          font-size: 17px;
+          transition: all 0.2s linear;
+        }
+        a.active {
+          color: $maincolor;
+        }
+      }
+    }
+  }
+  > .link.active {
+    transform: translateX(0);
+  }
+}
